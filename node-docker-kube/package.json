@@ -1,0 +1,31 @@
+{
+  "name": "docker-kube",
+  "version": "1.0.0",
+  "description": "a starter app' with node, Docker, and Kubernetes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yactouat/node-containerized-templates.git"
+  },
+  "keywords": [
+    "node",
+    "docker",
+    "kubernetes"
+  ],
+  "author": "Yacine Touati <yacine.touati.pro@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yactouat/node-containerized-templates/issues"
+  },
+  "homepage": "https://github.com/yactouat/node-containerized-templates#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
