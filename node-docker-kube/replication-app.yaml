@@ -1,5 +1,6 @@
 apiVersion: v1
 # what this replication controller does is to run two times the pod that is defined in the template part of the file
+# the pods that are created by this controller can run on multiple nodes
 kind: ReplicationController
 metadata:
     name: ndk-controller
