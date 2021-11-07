@@ -1,0 +1,21 @@
+apiVersion: v1
+# what this replication controller does is to run two times the pod that is defined in the template part of the file
+kind: ReplicationController
+metadata:
+    name: ndk-controller
+spec:
+    replicas: 2
+    selector:
+        app: ndk-lbl
+    # the template here will contain the pod definition just like we did in the pod-app.yaml file
+    template:
+        metadata:
+            labels:
+                app: ndk-lbl
+        spec:
+            containers:
+            - name: ndk
+              image: yacinetouati/node-docker-kube
+              ports:
+              - name: ndk-app-port
+                containerPort: 3000
