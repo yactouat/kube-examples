@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-docker-kube-app
+  labels:
+    app: node-docker-kube-lbl
+spec:
+  containers:
+  - name: node-docker-kube
+    image: yacinetouati/node-docker-kube
+    ports:
+    - containerPort: 3000
