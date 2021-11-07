@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: node-docker-kube-app
+  name: ndk-app
   labels:
-    app: node-docker-kube-lbl
+    app: ndk-lbl
 spec:
   containers:
-  - name: node-docker-kube
+  - name: ndk
     image: yacinetouati/node-docker-kube
     ports:
-    - containerPort: 3000
+    - name: ndk-app-port
+      containerPort: 3000

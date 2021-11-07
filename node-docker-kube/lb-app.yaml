@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ndk-service
+spec:
+  ports:
+  - port: 80
+    targetPort: ndk-app-port
+    protocol: TCP
+  # 'selector' means that this service is created for the pod that is labelled with the key/value pair 'app:label'
+  selector:
+    app: ndk-lbl
+  type: LoadBalancer
