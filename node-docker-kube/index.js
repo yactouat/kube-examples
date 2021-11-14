@@ -1,11 +1,24 @@
+const cors = require("cors");
 const express = require("express");
+
 const app = express();
+
+app.use(cors({
+    origin: '*'
+}));
+	
+app.use(express.json());  
 
 app.get('/', function(req, res) {
     res.json({
         msg: "app' works",
         data: null
     });
+});
+
+app.post('/', function(req, res) {
+    console.log(req.body);
+    res.send("OK");
 });
 
 const server = app.listen(3000, function() {
