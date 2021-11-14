@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ndk-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ndk-lbl
+    spec:
+      containers:
+      - name: ndk
+        image: yacinetouati/node-docker-kube:2
+        ports:
+        - name: ndk-app-port
+          containerPort: 3000

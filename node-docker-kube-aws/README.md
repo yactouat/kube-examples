@@ -1,6 +1,6 @@
-# node-docker-kube
+# node-docker-kube-aws
 
-a starter educational app' with node, Docker, and Kubernetes (this setup has been tested on AWS) to get familiar with these kinds of deployments
+a starter educational app' with node, Docker, and Kubernetes (this setup has been tested on AWS) to get familiar with these kinds of deployments on AWS
 
 ## how to run
 

@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ndk-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: RESERVED_IP_NAME
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"
+spec:
+  defaultBackend:
+    service:
+      name: ndk-service
+      port:
+        number: 80

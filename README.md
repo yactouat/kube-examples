@@ -8,8 +8,7 @@ This repo is my living documentation to get a feel at node apps with Kubernetes
 
 - you need to have Docker installed on your machine and also a Dockerhub account
 - you need `kubectl`
-- you also need `kops` to create and manage your Kubernetes cluster (cf. <https://kops.sigs.k8s.io/getting_started/aws/> )
-- an AWS account is nice to have
+- AWS, GCP accounts are nice to have
 
 ## how-to's
 
@@ -20,6 +19,12 @@ This repo is my living documentation to get a feel at node apps with Kubernetes
 ### create a cluster with kops
 
 #### AWS
+
+##### prerequisites for AWS
+
+- you'll need the `aws` cli installed and configured on your machine
+
+##### AWS using kops
 
 - this is how you would create an #AWS cluster with #Kops =>
   - <https://kops.sigs.k8s.io/getting_started/aws/>
@@ -35,6 +40,23 @@ This repo is my living documentation to get a feel at node apps with Kubernetes
   - in Route53, create an A record as an alias routing traffic to an application load balancer which would be the load balancer you previously created
   - after a while, your instances list will be updated inside the load balancer to not include the control plane node and the remaining nodes instances should appear as "InService"
   - you will also notice that you have new ELB security groups set up and that the security group of your nodes has been updated
+
+### GCP
+
+#### prerequisites for GCP
+
+- you'll need the `gcloud` SDK installed and configured on your machine
+
+#### create a cluster
+
+##### using `gcloud`
+
+- set project id if not done already => `gcloud config set project {project_id}`
+- set compute zone for your project, for instance => `gcloud config set compute/zone europe-west3-a`
+- set compute region for your project, for instance => `gcloud config set compute/region europe-west3`
+- `gcloud container clusters create {cluster_name} --num-nodes={number_of_nodes}` (it makes sense to have at least 2 nodes)
+- get your cluster's credentials => `gcloud container clusters get-credentials {cluster_name}` => this will set up `kubectl` to interact with your cluster
+- you can delete a cluster with `gcloud container clusters delete {cluster_name}`
 
 ### delete a resource on the cluster
 
