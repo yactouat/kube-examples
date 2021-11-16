@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: ndk
-        image: yacinetouati/node-docker-kube:2
+        image: yacinetouati/YOUR_APP_NAME
         ports:
         - name: ndk-app-port
           containerPort: 3000

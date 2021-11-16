@@ -4,10 +4,10 @@ a starter educational app' with node, Docker, and Kubernetes (this setup has bee
 
 ## how to run
 
-1. `docker build --file node-docker-kube.Dockerfile --tag {dockerhub_username}/node-docker-kube:{tag} .`
-2. `docker run -p 80:3000 -it {dockerhub_username}/node-docker-kube:{tag}` => access the app' @ <http://localhost>
+1. `docker build --file YOUR_APP_NAME.Dockerfile --tag {dockerhub_username}/YOUR_APP_NAME:{tag} .`
+2. `docker run -p 80:3000 -it {dockerhub_username}/YOUR_APP_NAME:{tag}` => access the app' @ <http://localhost>
 3. `docker login`
-4. `docker push {dockerhub_username}/node-docker-kube` => pushing to dockerhub will allow you to pull the image from kube
+4. `docker push {dockerhub_username}/YOUR_APP_NAME` => pushing to dockerhub will allow you to pull the image from kube
 5. with your GCP cluster running and `kubectl` wired to it (see root readme and how to achieve that), create the app' deployement => `kubectl create -f deployment.yaml`
 6. expose your deployment to the World with a load balancer => `kubectl create -f lb-app.yml`
 7. get the external IP of your service => `kubectl get service ndk-service`
