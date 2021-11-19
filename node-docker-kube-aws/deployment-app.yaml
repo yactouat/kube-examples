@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: ndk
-        image: yacinetouati/YOUR_APP_NAME
+        image: DOCKERHUB_USERNAME/YOUR_APP_NAME
         ports:
         - name: ndk-app-port
           containerPort: 3000
