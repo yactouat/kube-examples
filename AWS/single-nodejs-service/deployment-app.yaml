@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ndk-deployment
+  name: nodejs-service-deployment
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: ndk-lbl
+        app: nodejs-service-lbl
     spec:
       containers:
-      - name: ndk
+      - name: nodejs-service
         image: DOCKERHUB_USERNAME/YOUR_APP_NAME
         ports:
-        - name: ndk-app-port
+        - name: nodejs-service-app-port
           containerPort: 3000

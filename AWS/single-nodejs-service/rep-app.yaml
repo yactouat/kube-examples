@@ -3,20 +3,20 @@ apiVersion: v1
 # the pods that are created by this controller can run on multiple nodes
 kind: ReplicationController
 metadata:
-    name: ndk-controller
+    name: nodejs-service-controller
 spec:
     replicas: 2
     selector:
-        app: ndk-lbl
+        app: nodejs-service-lbl
     # the template here will contain the pod definition just like we did in the pod-app.yaml file
     template:
         metadata:
             labels:
-                app: ndk-lbl
+                app: nodejs-service-lbl
         spec:
             containers:
-            - name: ndk
+            - name: nodejs-service
               image: DOCKERHUB_USERNAME/YOUR_APP_NAME
               ports:
-              - name: ndk-app-port
+              - name: nodejs-service-app-port
                 containerPort: 3000

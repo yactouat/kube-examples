@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ndk-app
+  name: nodejs-service-app
   labels:
-    app: ndk-lbl
+    app: nodejs-service-lbl
 spec:
   containers:
-  - name: ndk
+  - name: nodejs-service
     image: DOCKERHUB_USERNAME/YOUR_APP_NAME
     ports:
-    - name: ndk-app-port
+    - name: nodejs-service-app-port
       containerPort: 3000

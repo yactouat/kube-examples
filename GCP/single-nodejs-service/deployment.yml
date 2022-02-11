@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ndk-deployment
+  name: nodejs-service-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ndk
+      app: nodejs-service
   template:
     metadata:
       labels:
-        app: ndk
+        app: nodejs-service
     spec:
       containers:
-      - name: ndk-container
+      - name: nodejs-service-container
         image: DOCKERHUB_USERNAME/YOUR_APP_NAME
         ports:
         - name: nodejs-port
