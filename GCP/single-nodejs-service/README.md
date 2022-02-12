@@ -2,14 +2,9 @@
 
 a starter educational app' with node, Docker, and Kubernetes to get familiar with these kinds of deployments on the GCP; this app' supports TLS traffic
 
-## !important
-
-Deploying resources on the GCP costs money, if you're just testing stuff, be sure to delete resources afterwards.
-
 ## prerequisites
 
-- `gcloud` cli installed on your machine
-- have a project on the GCP
+cf `../README.md`
 
 ## how to run
 
@@ -22,9 +17,7 @@ Deploying resources on the GCP costs money, if you're just testing stuff, be sur
 
 ### Kubernetes part
 
-- set project id if not done already => `gcloud config set project {project_id}`
-- set compute zone for your project, for instance => `gcloud config set compute/zone europe-west3-a`
-- set compute region for your project, for instance => `gcloud config set compute/region europe-west3`
+- necessary steps for using Kubernetes on the GCP from `../README.md`
 - `gcloud container clusters create {cluster_name} --num-nodes={number_of_nodes}` (it makes sense to have at least 2 nodes)
 - get your cluster's credentials => `gcloud container clusters get-credentials {cluster_name}` => this will set up `kubectl` to interact with your cluster
 - you can delete a cluster with `gcloud container clusters delete {cluster_name}`
