@@ -34,6 +34,28 @@ a container runtime is responsible for:
 - providing an execution environment for the containers images and for the pod abstraction
 - swapping container runtimes
 
+### Deployment object
+
+Kubernetes deployment object is used for deploying stateless applications like web servers.
+
+Deployment objects:
+
+- create replica sets based on what's defined in the deployment specs
+- manage the state of the replica sets
+
+Deployments are really useful when you want to manage the transition to a new version of your application (or even roll back to the previous one)
+Deployments still need a service to expose them to the World so users can reach your application, you can use a load-balancer object for that, for instance.
+
+Wen using a deployment object, you define the state of your application that Kubernetes will verify so that the cluster matches the desired state; it is better to use these kinds of objects than directly using replication controllers or replica sets because it's easier to do updates and rollbacks with deployments.
+
+With a deployment object, you can:
+
+- create a deployment (which means deploying an app')
+- update a deployment (updating an app' with a new version)
+- do rolling updates, or zero-downtime-deployments
+- roll back to a previous version of your app'
+- pause/resume a deployment (to do canary-deployments for instance)
+
 ### kubelets
 
 They are responsible for:
@@ -46,11 +68,19 @@ Kubelets can communicate with all running pods on a given node. A node's kubelet
 
 ### Kubernetes
 
-Kubernetes is a tool used for automatic containers orchestration in production environments, just like other tools, such as AWS ECS, Docker Swarm, etc. These tools follow this pattern:
+Kubernetes is a clustered environment tool used for automatic containers orchestration in production environments, just like other tools, such as AWS ECS, Docker Swarm, etc. These tools follow this pattern:
 
 - *managers* receive an expected *state* that describes an application's stack deployment as it should be on prod.; this description contains the number of replicas to run, the exposed ports, etc.
 - inside a *cluster* managed by the tool, machines are scanned in order to have *workers* delegating tasks on them; these machines then become *worker nodes*
 - *managers* watch for changes within the *cluster* and correct discrepancies between the actual and the desired *state* of your application stack
+
+Kubernetes API objects are a collection of primitives that represent a system's state; they are the building blocks of any Kubernetes deployment, with the most basic one being the *pod*.
+
+The key benefits of using Kubernetes are:
+
+- the speed of deployment, which gives the ability for systems to change quickly
+- the speed of recovery thanks to the definition of our system desired state (with a declarative configuration) in Kubernetes
+- the ability to hide infrastructure complexity in the cluster
 
 ### nodes
 
@@ -79,11 +109,6 @@ It is via a kube proxie and HTTP services that pods within a node can be reached
 
 Kubelets and kube-proxies communicate directly with the Kubernetes API server.  
 
-To debug what's happening within a node, it's useful to run a new pod in it that will act as a shell to try interactions within your cluster =>
-
-- `kubectl run -i --tty busybox --image=busybox --restart=Never -- sh`
-- also you can execute a shell inside a given pod with => `kubectl exec -it {pod} -- bash`
-
 ### pods
 
 Basically, a pod is a deployed container. In other words, pods are a single or a collection of containers that are deployed as a single unit (essentially, the container-based applications); from a Kubernetes perspective, these are the most basic units of work in your cluster; they also are the cluster's resource scheduling units.
@@ -92,17 +117,39 @@ Before launching a container based on an image in Kubernetes, you'll need a pod 
 
 In a cluster, every deployed pod will have its own IP address. Pods within a node can communicate via a bridge using the real IP addresses of the pods. That means pods on a node can communicate with all pods on pre defined ports on all nodes in a cluster without NAT.
 
-To debug what's happening inside a pod, you can attach to it to see the logs that it may display by running => `kubectl attach pod_name`. You can also execute a command within a pod's running container with, for instance, `kubectl exec pod_name -- ls /folder`.
-
 You can have multi container pods in Kubernetes, but one container within this pod dies, then all of the pod goes away.
+
+### Service object
+
+A Service Kubernetes object defines rules and load balancing for accessing your application from the internet.  
+
+Each service has a service endpoint, which is a URL that other pods can connect to; *service-discovery* is a way for pods to easily communicate with each other.
+
+- Kubernetes services add persistency to the epehemerality of pods by providing a network abstraction for pod access; typically =>
+- a service will allocate an IP and a DNS name to the application service you are defining so that end-users can access it
+- services can also be leveraged to scale up/down applications by adding/removing pods based on the demands for a given application at any point in time
+- services can also act as load balancers for pods
+- you'll always find services that will act as frontend for specific pods
 
 ## how-to's
 
 ### `kubectl` cheat sheet
 
+### debug what's happening within a node
+
+`kubectl run -i --tty busybox --image=busybox --restart=Never -- sh` => this will run a new pod in it that will act as a shell to try interactions within your cluster.
+
 #### delete a resource on a cluster
 
 - `kubectl delete -f {resource}.yaml`
+
+#### describe a service
+
+- `kubectl describe service`
+
+#### execute a command within a pod's running container
+
+`kubectl exec pod_name -- ls /folder` (or whatever other command you want to do).
 
 #### get pods by selector
 
@@ -111,8 +158,18 @@ You can have multi container pods in Kubernetes, but one container within this p
 #### get the logs of a given pod
 
 - `kubectl get pods`
-- `kubectl logs {pod}` OR `kubectl logs --follow {pod}`
+- `kubectl attach pod_name` OR `kubectl logs {pod}` OR `kubectl logs --follow {pod}` OR `kubectl exec -it {pod} -- bash` (and then whatever you do to see the logs)
 
-#### more
+#### useful commands with deployments
+
+Useful commands with deployments =>
+
+- `kubectl get deployments`
+- `kubectl get rs` => get the replica sets
+- `kubectl rollout status deployment/{deployment}`
+- `kubectl rollout history deployment/{deployment}`
+- `kubectl rollout undo deployment/{deployment}` => will rollback to previous version of your deployed app'
+
+#### more commands
 
 - <https://kubernetes.io/docs/reference/kubectl/cheatsheet/>

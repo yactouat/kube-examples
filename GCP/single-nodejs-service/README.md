@@ -18,9 +18,6 @@ cf `../README.md`
 ### Kubernetes part
 
 - necessary steps for using Kubernetes on the GCP from `../README.md`
-- `gcloud container clusters create {cluster_name} --num-nodes={number_of_nodes}` (it makes sense to have at least 2 nodes)
-- get your cluster's credentials => `gcloud container clusters get-credentials {cluster_name}` => this will set up `kubectl` to interact with your cluster
-- you can delete a cluster with `gcloud container clusters delete {cluster_name}`
 - with your GCP cluster running and `kubectl` wired to it create the app' deployement => `kubectl create -f deployment.yaml`
 - expose your deployment to the World with a load balancer => `kubectl create -f lb-app.yml`
 - get the external IP of your service => `kubectl get service nodejs-service-service`
