@@ -2,7 +2,7 @@
 
 ## !important
 
-Deploying resources on the GCP costs money, if you're just testing stuff, be sure to delete resources afterwards. You can delete a cluster by running `gcloud container clusters delete {cluster_name}`.
+Deploying resources on the GCP costs money, if you're just testing stuff, be sure to delete resources afterwards. You can delete a cluster, for instance, by running `gcloud container clusters delete {cluster_name}`. Also, also the resources you create with the `gcloud` CLI are deletable in the GCP UI.
 
 ## prerequisites
 
@@ -21,3 +21,7 @@ Deploying resources on the GCP costs money, if you're just testing stuff, be sur
 - get your cluster's credentials => `gcloud container clusters get-credentials {cluster_name}` (this will set up `kubectl` to interact with your cluster)
 
 The compute region and zone refer to where your Kubernetes clusters and resources will live.
+
+## good to know
+
+- GKE assigns DNS hostnames to static kube services IP's. For example, hello-app.default.svc.cluster.local.

@@ -32,5 +32,5 @@ cf `../README.md`
 - update the domain value in `managed-cert.yaml` apply a Google managed certificate to your cluster with `kubectl apply -f managed-cert.yaml`
 - create the app' deployement => `kubectl create -f deployment.yaml`
 - expose your deployment with a node port => `kubectl create -f nodeport.yml`
-- modify the static ip name in the `ingress.yml` you've created in step 3 and load balance your deployment with => `kubectl create -f ingress.yml`
+- modify the static ip name in the `ingress.yml` file that is present in this folder and load balance your deployment with => `kubectl create -f ingress.yml`
 - check the status of your managed cert (provisioning might take 60 minutes) => `kubectl describe managedcertificate managed-cert` => you should be able to visit `https://{your_domain}` when the command shows `Certificate Status:  Active`

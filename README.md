@@ -26,6 +26,10 @@ In Kubernetes, you would deploy an application to a cluster, which will then be 
 
 It is the default behavior of control plane nodes to only run pods that are system pods.  
 
+### `ClusterIP` service
+
+A `ClusterIp` service is a service that has an IP address that is only reachable from inside the cluster.
+
 ### container runtime
 
 a container runtime is responsible for:
@@ -113,19 +117,24 @@ Kubelets and kube-proxies communicate directly with the Kubernetes API server.
 
 Basically, a pod is a deployed container. In other words, pods are a single or a collection of containers that are deployed as a single unit (essentially, the container-based applications); from a Kubernetes perspective, these are the most basic units of work in your cluster; they also are the cluster's resource scheduling units.
 
-Before launching a container based on an image in Kubernetes, you'll need a pod definition that describes the application you want to run. Pods are stateless by default (meaning that they no depend on a persistent storage); this is because a system where each pods have their own state cannot be scaled horizontally. Pods are ephemeral by nature as they are never re deployed.  
+Before launching a container based on an image in Kubernetes, you'll need a pod definition that describes the application you want to run. Pods are stateless by default (meaning that they no depend on a persistent storage); this is because a system where each pods have their own state cannot be scaled horizontally. Pods are ephemeral by nature as they are never re deployed but rather destructed and have new ones being spawned.  
 
-In a cluster, every deployed pod will have its own IP address. Pods within a node can communicate via a bridge using the real IP addresses of the pods. That means pods on a node can communicate with all pods on pre defined ports on all nodes in a cluster without NAT.
+In a cluster, every deployed pod will have its own IP address but those IPs can only be reached from inside your cluster. Pods within a node can communicate via a bridge using the real IP addresses of the pods. That means pods on a node can communicate with all pods on pre defined ports on all nodes in a cluster without NAT.
 
 You can have multi container pods in Kubernetes, but one container within this pod dies, then all of the pod goes away.
+
+### rolling updates
+
+Describes deployments updates that incrementally replace existing pods with pods containing a new Docker image.
 
 ### Service object
 
 A Service Kubernetes object defines rules and load balancing for accessing your application from the internet.  
 
-Each service has a service endpoint, which is a URL that other pods can connect to; *service-discovery* is a way for pods to easily communicate with each other.
+Each service has a service endpoint, which is a URL that other pods can connect to; *service-discovery* is a way for pods to easily communicate with each other. Services group pods into one static IP address, reachable from any Pod inside the cluster; a service of type `LoadBalancer`, for instance, makes those clusters reachable from the outside.
 
-- Kubernetes services add persistency to the epehemerality of pods by providing a network abstraction for pod access; typically =>
+Kubernetes services add persistency to the epehemerality of pods by providing a network abstraction for pod access; typically =>
+
 - a service will allocate an IP and a DNS name to the application service you are defining so that end-users can access it
 - services can also be leveraged to scale up/down applications by adding/removing pods based on the demands for a given application at any point in time
 - services can also act as load balancers for pods

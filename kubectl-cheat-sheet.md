@@ -25,6 +25,11 @@
 - `kubectl get pods`
 - `kubectl attach pod_name` OR `kubectl logs {pod}` OR `kubectl logs --follow {pod}` OR `kubectl exec -it {pod} -- bash` (and then whatever you do to see the logs)
 
+### scale deployment
+
+- `kubectl scale deployment {deployment_name} --replicas={number_of_replicas}`
+- example with a `HorizontalPodAutoscaler` => `kubectl autoscale deployment {deployment_name} --cpu-percent=80 --min=1 --max=5`
+
 ### useful commands with deployments
 
 Useful commands with deployments =>

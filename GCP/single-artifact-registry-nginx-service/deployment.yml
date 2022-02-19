@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-service
+  template:
+    metadata:
+      labels:
+        app: nginx-service
+    spec:
+      containers:
+      - name: nginx-service-container
+        image: europe-west3-docker.pkg.dev/${PROJECT_ID}/nginx-service/nginx-service:v1 # ! replace relevant values here
+        ports:
+        - name: nginx-port
+          containerPort: 80
