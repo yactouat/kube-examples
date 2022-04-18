@@ -86,6 +86,11 @@ The key benefits of using Kubernetes are:
 - the speed of recovery thanks to the definition of our system desired state (with a declarative configuration) in Kubernetes
 - the ability to hide infrastructure complexity in the cluster
 
+### node pool
+
+A node pool is a group of nodes within a cluster that all have the same configuration
+Custom node pools are useful when you need to schedule Pods that require more resources than others, such as more memory or more local disk space.
+
 ### nodes
 
 Kubernetes nodes are components where application pods actually run, they consist of a virtual or physical worker machines; so it makes sense to have at least two nodes on a Kubernetes cluster, in case of the aforementioned machines dies. Each node of a Kubernetes cluster must have a unique hostname and a unique MAC address.
